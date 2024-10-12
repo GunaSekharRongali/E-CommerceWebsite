@@ -2,7 +2,7 @@
 This is a simple e-commerce web application built with React.js. It allows users to browse products, add/remove items from the cart, and adjust the quantity of items in their cart. The app fetches products from the Fake Store API and includes a responsive design using Tailwind CSS.
 
 # Website Link
-[E-Commercewebsite](https://e-commercewebsite-nine.vercel.app/)
+[E-Commercewebsite](https://e-commerce-website-nine-orcin.vercel.app/)
 
 
 ## 📋 Features
