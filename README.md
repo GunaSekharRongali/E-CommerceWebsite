@@ -16,7 +16,7 @@ Browse Products: Displays products fetched from the Fake Store API.
 
 ## 📸 Screenshots
 
-![Screenshot Title](Screenshot.png)
+![Screenshot Title](websiteImage.png)
 
 ---
 
