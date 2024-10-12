@@ -1,7 +1,26 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
-function Items({items,AddToCart}) {
+const Fashion = ({AddToCart}) => {
+    const [items, setItems] = useState([]);
+
+    const fetchItems = async () => {
+        try {
+          let res = await fetch('https://fakestoreapi.com/products');
+          let data = await res.json();
+          let mainData = data.filter((item,index)=>{
+            return (item.category === "women's clothing" || item.category === "men's clothing")
+          });
+          setItems(mainData);
+        } catch (error) {
+          console.error("Failed to fetch items", error);
+          // Display error message to the user
+        }
+      };
+      
+      useEffect(()=>{
+        fetchItems()
+      },[])
   return (
     <div  className="mt-[70px]">
       <div className='text-white bg-grey-300 px-0 mt-0 w-full h-[200px] flex flex-wrap justify-center gap-[20px]' >
@@ -31,4 +50,4 @@ function Items({items,AddToCart}) {
   )
 }
 
-export default Items
+export default Fashion

@@ -3,6 +3,12 @@ import './App.css'
 import Navbar from "./Navbar";
 import Cart from "./Cart";
 import Items from "./Items";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Accessories from './pages/Accessories';
+import Electronics from './pages/Electronics';
+import Fashion from './pages/Fashion';
+import Mobiles from './pages/Mobiles';
+import Product from './pages/Product';
 
 // const Api = 'https://fakestoreapi.com/products';
 
@@ -10,9 +16,9 @@ import Items from "./Items";
 function App() {
   const [items, setItems] = useState([])
   const [cartItems, setCartItems] = useState([])
-  const [cart, setCart] = useState(false)
   const [cartLength,setCartLength]= useState(0);
 
+  
   const fetchItems = async () => {
     try {
       let res = await fetch('https://fakestoreapi.com/products');
@@ -83,18 +89,29 @@ const cartprice = () => {
   return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
 };
   
-const cartHandle = () => {
-  setCart(!cart)
-}
+
 
   return (
     <>
+    <Router>
+    <Navbar cartLength = {cartLength}/>
+
+    <Routes>
+      <Route path="/" element={<Items items = {items} AddToCart = {AddToCart}/>} />
+      <Route path='/accessories' element={<Accessories AddToCart = {AddToCart}/>}></Route>
+      <Route path='/electronics' element={<Electronics AddToCart = {AddToCart}/>}></Route>
+      <Route path='/fashion' element={<Fashion AddToCart = {AddToCart}/>}></Route>
+      <Route path='/mobiles' element={<Mobiles AddToCart = {AddToCart}/>}></Route>
+      <Route path='/product/:id' element={<Product AddToCart = {AddToCart}/>}></Route>
+      <Route path='/cart' element={<Cart cartItems = {cartItems} cartprice = {cartprice} removeFromCart = {removeFromCart} addQuantity = {addQuantity} removeQuantity = {removeQuantity} /> }></Route>
+
+    </Routes>
+
+    {/* { !cart && <Items items = {items} AddToCart = {AddToCart}/>} */}
+
     
-    <Navbar cartHandle = {cartHandle} cartLength = {cartLength}/>
+    </Router>
 
-    { !cart && <Items items = {items} AddToCart = {AddToCart}/>}
-
-    { cart && <Cart removeFromCart={removeFromCart} cartItems={cartItems} addQuantity={addQuantity} removeQuantity={removeQuantity} cartprice={cartprice} />}
 
     </>
   )
